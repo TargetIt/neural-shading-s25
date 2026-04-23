@@ -38,3 +38,8 @@
   - Step 02 用于对比“先降采样输入再渲染”；
   - Step 03 用于对比“先渲染再降采样”；
   - Step 04/05 进一步围绕该基准定义误差与优化。
+
+## 7. 注意事项
+- normal 贴图必须先做 `scale=2, offset=-1`，否则法线方向会错误，渲染高光明显异常。
+- albedo 建议在线性空间参与 BRDF 计算（`linearize=True`），避免 gamma 空间下能量不正确。
+- `light_dir`、`view_dir` 与 normal 都应归一化，保证 BRDF 计算稳定。
